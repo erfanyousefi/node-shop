@@ -1,6 +1,5 @@
 const {DataTypes} = require("sequelize");
 const sequelize = require("../../configs/sequelize.config");
-const {Order} = require("../order/order.model");
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
@@ -8,7 +7,7 @@ const User = sequelize.define('user', {
     mobile: {type: DataTypes.STRING(15), allowNull: false, unique: true},
     wallet_balance: {type: DataTypes.DECIMAL(10, 2), defaultValue: 0},
     otpId: {type: DataTypes.INTEGER, allowNull: true, unique: true}
-}, {timestamps: true, createdAt: "created_at"});
+}, {timestamps: true, createdAt: "created_at", updatedAt: false});
 
 const Otp = sequelize.define("user_otp", {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
@@ -16,10 +15,6 @@ const Otp = sequelize.define("user_otp", {
     expires_in: {type: DataTypes.DATE, allowNull: false},
     userId: {type: DataTypes.INTEGER, allowNull: false, unique: true}
 });
-User.hasOne(Otp, {foreignKey: "userId", onDelete: "CASCADE"});
-Otp.belongsTo(User);
-User.belongsTo(Order);
-
 module.exports = {
     User,
     Otp
