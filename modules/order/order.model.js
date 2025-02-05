@@ -1,8 +1,5 @@
 const {DataTypes} = require("sequelize");
 const sequelize = require("../../configs/sequelize.config");
-const {Product} = require("../product/product.model");
-const {User} = require("../user/user.model");
-const {Payment} = require("../payment/payment.model");
 
 const Order = sequelize.define('order', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -23,16 +20,6 @@ const OrderItems = sequelize.define('order_item', {
     sizeId: {type: DataTypes.INTEGER, allowNull: true},
     count: {type: DataTypes.INTEGER}
 });
-
-OrderItems.hasMany(Order, {foreignKey: "productId"});
-Order.belongsTo(OrderItems, {onDelete: "CASCADE"});
-
-Order.hasMany(Product, {foreignKey: "productId"});
-Product.belongsTo(Order, {onDelete: "CASCADE"});
-
-Order.hasMany(User, {foreignKey: "userId", sourceKey: "id", onDelete: "CASCADE"});
-Order.hasOne(Payment, {foreignKey: "paymentId", sourceKey: "id", onDelete: "CASCADE"});
-
 module.exports = {
     Order,
     OrderItems
