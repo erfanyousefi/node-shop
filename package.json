@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@sequelize/mariadb": "^7.0.0-alpha.44",
     "express": "^4.21.2",
     "mysql2": "^3.12.0",
     "sequelize": "^6.37.5"
