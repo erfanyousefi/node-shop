@@ -10,7 +10,7 @@ const Order = sequelize.define('order', {
     total_amount: {type: DataTypes.DECIMAL},
     final_amount: {type: DataTypes.DECIMAL},
     discount_amount: {type: DataTypes.DECIMAL},
-}, {createdAt: "created_at"});
+}, {createdAt: "created_at", updatedAt: false});
 
 const OrderItems = sequelize.define('order_item', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -19,7 +19,7 @@ const OrderItems = sequelize.define('order_item', {
     colorId: {type: DataTypes.INTEGER, allowNull: true},
     sizeId: {type: DataTypes.INTEGER, allowNull: true},
     count: {type: DataTypes.INTEGER}
-});
+}, {timestamps: false});
 module.exports = {
     Order,
     OrderItems
