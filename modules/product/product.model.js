@@ -11,14 +11,14 @@ const Product = sequelize.define("product", {
     type: {type: DataTypes.ENUM("single", "coloring", "sizing")},
     count: {type: DataTypes.INTEGER, defaultValue: 0},
     content: {type: DataTypes.TEXT, allowNull: true}
-}, {createdAt: "created_at"});
+}, {createdAt: "created_at", updatedAt: false});
 
 const ProductDetail = sequelize.define("product_detail", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     productId: {type: DataTypes.INTEGER},
     key: {type: DataTypes.STRING},
     value: {type: DataTypes.STRING},
-});
+}, {timestamps: false});
 const ProductSize = sequelize.define("product_size", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     productId: {type: DataTypes.INTEGER},
@@ -27,7 +27,7 @@ const ProductSize = sequelize.define("product_size", {
     price: {type: DataTypes.DECIMAL},
     discount: {type: DataTypes.DECIMAL},
     active_discount: {type: DataTypes.BOOLEAN},
-});
+}, {timestamps: false});
 const ProductColor = sequelize.define("product_color", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     productId: {type: DataTypes.INTEGER},
@@ -37,16 +37,7 @@ const ProductColor = sequelize.define("product_color", {
     price: {type: DataTypes.DECIMAL},
     discount: {type: DataTypes.DECIMAL},
     active_discount: {type: DataTypes.BOOLEAN},
-});
-
-Product.hasMany(ProductDetail, {foreignKey: "productId", sourceKey: "id", as: "details", onDelete: "CASCADE"});
-ProductDetail.belongsTo(Product, {foreignKey: "productId", targetKey: "id"});
-
-Product.hasMany(ProductSize, {foreignKey: "productId", sourceKey: "id", as: "sizes", onDelete: "CASCADE"});
-ProductSize.belongsTo(Product, {foreignKey: "productId", targetKey: "id"});
-
-Product.hasMany(ProductColor, {foreignKey: "productId", sourceKey: "id", as: "colors", onDelete: "CASCADE"});
-ProductColor.belongsTo(Product, {foreignKey: "productId", targetKey: "id"});
+}, {timestamps: false});
 
 module.exports = {
     Product,
