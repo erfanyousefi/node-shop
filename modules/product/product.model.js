@@ -4,7 +4,6 @@ const sequelize = require("../../configs/sequelize.config");
 const Product = sequelize.define("product", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING},
-    slug: {type: DataTypes.STRING},
     price: {type: DataTypes.DECIMAL, allowNull: true},
     discount: {type: DataTypes.DECIMAL, allowNull: true},
     active_discount: {type: DataTypes.BOOLEAN, allowNull: true, defaultValue: false},
@@ -12,7 +11,6 @@ const Product = sequelize.define("product", {
     count: {type: DataTypes.INTEGER, defaultValue: 0},
     content: {type: DataTypes.TEXT, allowNull: true}
 }, {createdAt: "created_at", updatedAt: false});
-
 const ProductDetail = sequelize.define("product_detail", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     productId: {type: DataTypes.INTEGER},
