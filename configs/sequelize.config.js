@@ -14,11 +14,10 @@ const sequelize = new Sequelize({
     port: 3306,
     username: "root",
     password: "root",
-    database: "shop"
+    database: "shop",
+    logging: false,
 });
 sequelize.authenticate().then(async () => {
-    // await sequelize.sync({alter: true});
-    await sequelize.sync({alter: true});
     console.log("connected to MySQL");
 }).catch(err => {
     console.log("Cannot connect to MySQL, error: ", err?.message);
